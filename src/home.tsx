@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-
-import {
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Disease {
   name: string;
@@ -16,57 +13,47 @@ interface Reminder {
   medicine: string;
   time: string;
 }
+
+interface MedicineInfo {
+  name: string;
+  use: string;
+  warning: string;
+}
+
 const diseases: Disease[] = [
+  {
+    name: "Heart Disease",
+    symptoms: [
+      "chest pain",
+      "heart pain",
+      "pain in chest",
+      "breathing difficulty",
+      "chest tightness",
+    ],
+    severity: "Critical",
+    cause:
+      "Heart problems may occur because of blocked blood flow or high cholesterol.",
+    solution:
+      "Seek emergency medical attention immediately.",
+  },
+
   {
     name: "Stomach Infection",
     symptoms: [
       "stomach pain",
-      "stomach ache",
+      "pain in stomach",
       "abdomen pain",
-      "gastric",
+      "pain in abdomen",
       "vomiting",
       "nausea",
-      "diarrhea",
+      "gastric",
       "food poisoning",
     ],
     severity: "Medium",
     cause:
-      "Stomach infections occur because of contaminated food, bacteria, or viruses.",
+      "Stomach infections occur because of bacteria or unhealthy food.",
     solution:
-      "Drink clean water and maintain proper hygiene.",
-  },
-
-  {
-    name: "Sinus Infection",
-    symptoms: [
-      "nose pain",
-      "blocked nose",
-      "runny nose",
-      "sinus pain",
-      "nose irritation",
-      "sneezing",
-    ],
-    severity: "Low",
-    cause:
-      "Sinus infections occur because of allergies or viral infection.",
-    solution:
-      "Stay hydrated and avoid dust exposure.",
-  },
-
-  {
-    name: "Throat Infection",
-    symptoms: [
-      "throat pain",
-      "sore throat",
-      "swallowing pain",
-      "throat irritation",
-      "cough",
-    ],
-    severity: "Medium",
-    cause:
-      "Throat infections occur because of bacteria or viruses.",
-    solution:
-      "Drink warm fluids and avoid cold foods.",
+      "Drink clean water and avoid unhealthy food.",
   },
 
   {
@@ -74,48 +61,30 @@ const diseases: Disease[] = [
     symptoms: [
       "headache",
       "eye pain",
-      "head pain",
-      "light sensitivity",
-      "nausea",
+      "pain in eye",
+      "eye hurting",
     ],
     severity: "Medium",
     cause:
-      "Migraine occurs because of stress, dehydration, or excessive screen usage.",
+      "Migraine occurs because of stress or dehydration.",
     solution:
-      "Reduce screen time and stay hydrated.",
+      "Reduce screen time and rest properly.",
   },
 
   {
-    name: "Stress Disorder",
+    name: "Sinus Infection",
     symptoms: [
-      "stress",
-      "depressed",
-      "anxiety",
-      "mental stress",
-      "tiredness",
-      "headache",
+      "nose pain",
+      "pain in nose",
+      "blocked nose",
+      "runny nose",
+      "sneezing",
     ],
-    severity: "Medium",
+    severity: "Low",
     cause:
-      "Stress occurs because of emotional pressure or overthinking.",
+      "Sinus infections occur because of allergies or cold.",
     solution:
-      "Practice meditation and proper sleep.",
-  },
-
-  {
-    name: "Heart Disease",
-    symptoms: [
-      "heart pain",
-      "chest pain",
-      "chest tightness",
-      "breathing difficulty",
-      "fatigue",
-    ],
-    severity: "Critical",
-    cause:
-      "Heart disease occurs because of blocked blood flow or high cholesterol.",
-    solution:
-      "Seek emergency medical attention immediately.",
+      "Stay hydrated and avoid dust.",
   },
 
   {
@@ -123,178 +92,53 @@ const diseases: Disease[] = [
     symptoms: [
       "hair loss",
       "hair lose",
-      "hair thinning",
       "losing hair",
-      "bald spots",
+      "hair thinning",
     ],
     severity: "Low",
     cause:
       "Hair loss occurs because of stress or poor nutrition.",
     solution:
-      "Maintain proper nutrition and reduce stress.",
+      "Maintain healthy diet and reduce stress.",
   },
 
   {
-    name: "Skin Allergy",
+    name: "Urinary Infection",
     symptoms: [
-      "itching",
-      "rash",
-      "skin redness",
-      "skin irritation",
-      "swelling",
-    ],
-    severity: "Low",
-    cause:
-      "Skin allergies occur because of allergens or chemicals.",
-    solution:
-      "Avoid allergens and maintain cleanliness.",
-  },
-
-  {
-    name: "Ear Infection",
-    symptoms: [
-      "ear pain",
-      "ear itching",
-      "hearing loss",
-      "ear discharge",
+      "urination problem",
+      "pain while urinating",
+      "burning urination",
+      "frequent urination",
     ],
     severity: "Medium",
     cause:
-      "Ear infections occur because of bacteria or viruses.",
+      "Urinary infections occur because of bacteria or dehydration.",
     solution:
-      "Maintain ear hygiene.",
+      "Drink more water and maintain hygiene.",
   },
 
   {
-    name: "Acne / Pimples",
+    name: "Lung Problem",
     symptoms: [
-      "pimples",
-      "acne",
-      "face redness",
-      "oily skin",
-    ],
-    severity: "Low",
-    cause:
-      "Pimples occur because of hormones or bacteria.",
-    solution:
-      "Maintain face hygiene.",
-  },
-
-  {
-    name: "Back Pain",
-    symptoms: [
-      "back pain",
-      "lower back pain",
-      "spine pain",
-      "muscle stiffness",
-    ],
-    severity: "Low",
-    cause:
-      "Back pain occurs because of poor posture or muscle strain.",
-    solution:
-      "Maintain posture and perform stretching exercises.",
-  },
-
-  {
-    name: "Neck Pain",
-    symptoms: [
-      "neck pain",
-      "neck stiffness",
-      "shoulder pain",
-    ],
-    severity: "Low",
-    cause:
-      "Neck pain occurs because of muscle tension.",
-    solution:
-      "Perform stretching exercises.",
-  },
-
-  {
-    name: "Joint Pain",
-    symptoms: [
-      "knee pain",
-      "leg pain",
-      "hand pain",
-      "joint pain",
-      "joint stiffness",
-    ],
-    severity: "Medium",
-    cause:
-      "Joint pain occurs because of inflammation or arthritis.",
-    solution:
-      "Take proper rest and perform light exercise.",
-  },
-
-  {
-    name: "Lung Infection",
-    symptoms: [
-      "cough",
-      "breathing difficulty",
-      "chest tightness",
-      "fever",
+      "lungs problem",
+      "lung pain",
+      "breathing problem",
+      "shortness of breath",
     ],
     severity: "High",
     cause:
-      "Lung infections occur because of bacteria or smoking.",
+      "Lung problems may occur because of infection or smoking.",
     solution:
       "Avoid smoking and seek medical evaluation.",
   },
-
-  {
-    name: "Diabetes",
-    symptoms: [
-      "frequent urination",
-      "fatigue",
-      "blurred vision",
-      "thirst",
-      "weight loss",
-    ],
-    severity: "High",
-    cause:
-      "Diabetes occurs because of improper blood sugar regulation.",
-    solution:
-      "Maintain healthy diet and regular exercise.",
-  },
-
-  {
-    name: "Fever",
-    symptoms: [
-      "fever",
-      "body pain",
-      "weakness",
-      "high temperature",
-    ],
-    severity: "Medium",
-    cause:
-      "Fever occurs because of infection or immune response.",
-    solution:
-      "Take rest and stay hydrated.",
-  },
-
-  {
-    name: "Common Cold",
-    symptoms: [
-      "cold",
-      "runny nose",
-      "cough",
-      "sneezing",
-    ],
-    severity: "Low",
-    cause:
-      "Common cold occurs because of viral infection.",
-    solution:
-      "Rest properly and drink warm fluids.",
-  },
 ];
- 
-
 
 const bodyParts = [
   {
     emoji: "🧠",
     name: "Brain",
     about:
-      "Controls memory, thoughts, emotions, and body functions.",
+      "Controls memory, intelligence, emotions, and body functions.",
   },
 
   {
@@ -326,17 +170,31 @@ const bodyParts = [
   },
 
   {
-    emoji: "🦴",
-    name: "Bones",
+    emoji: "👃",
+    name: "Nose",
     about:
-      "Support and protect the body.",
+      "Helps smelling and breathing.",
   },
 
   {
-    emoji: "🩸",
-    name: "Blood",
+    emoji: "👅",
+    name: "Tongue",
     about:
-      "Carries oxygen and nutrients.",
+      "Helps tasting and speaking.",
+  },
+
+  {
+    emoji: "🦷",
+    name: "Teeth",
+    about:
+      "Help chewing food.",
+  },
+
+  {
+    emoji: "🍔",
+    name: "Stomach",
+    about:
+      "Breaks down food and supports digestion.",
   },
 
   {
@@ -347,109 +205,285 @@ const bodyParts = [
   },
 
   {
-    emoji: "🦷",
-    name: "Teeth",
+    emoji: "🫘",
+    name: "Kidneys",
     about:
-      "Help chewing and speaking.",
+      "Filter waste and maintain fluids.",
   },
 
   {
-    emoji: "👅",
-    name: "Tongue",
+    emoji: "🩸",
+    name: "Blood",
     about:
-      "Helps tasting and speaking.",
+      "Carries oxygen and nutrients.",
+  },
+
+  {
+    emoji: "🦠",
+    name: "White Blood Cells",
+    about:
+      "Fight infections in the body.",
+  },
+
+  {
+    emoji: "🩸",
+    name: "Red Blood Cells",
+    about:
+      "Carry oxygen throughout the body.",
+  },
+
+  {
+    emoji: "🦴",
+    name: "Bones",
+    about:
+      "Provide support and protection.",
+  },
+
+  {
+    emoji: "💪",
+    name: "Muscles",
+    about:
+      "Help movement and strength.",
+  },
+
+  {
+    emoji: "🦵",
+    name: "Legs",
+    about:
+      "Support movement and walking.",
+  },
+
+  {
+    emoji: "✋",
+    name: "Hands",
+    about:
+      "Help performing tasks.",
+  },
+
+  {
+    emoji: "🧬",
+    name: "DNA",
+    about:
+      "Carries genetic information.",
+  },
+
+  {
+    emoji: "🦴",
+    name: "Ligaments",
+    about:
+      "Connect bones together.",
   },
 ];
 
-const medicineInfo = [
+const medicineInfo: MedicineInfo[] = [
   {
     name: "Paracetamol",
-    about:
-      "Used for fever and pain relief.",
+    use: "Used for fever and pain relief.",
+    warning:
+      "Avoid overdose.",
   },
 
   {
     name: "Ibuprofen",
-    about:
-      "Used for pain and inflammation relief.",
-  },
-
-  {
-    name: "Diclofenac Sodium",
-    about:
-      "Used for joint pain and inflammation.",
+    use: "Used for pain and inflammation.",
+    warning:
+      "May irritate stomach.",
   },
 
   {
     name: "Amoxicillin",
-    about:
-      "Antibiotic used for bacterial infections.",
+    use: "Antibiotic for bacterial infections.",
+    warning:
+      "Use only with doctor guidance.",
   },
 
   {
     name: "Azithromycin",
-    about:
-      "Used for respiratory bacterial infections.",
-  },
-
-  {
-    name: "Ciprofloxacin",
-    about:
-      "Used for bacterial infections.",
+    use: "Used for respiratory infections.",
+    warning:
+      "Avoid unnecessary usage.",
   },
 
   {
     name: "Pantoprazole",
-    about:
-      "Used for acidity and stomach ulcers.",
+    use: "Used for acidity problems.",
+    warning:
+      "Long-term use requires monitoring.",
   },
 
   {
     name: "Omeprazole",
-    about:
-      "Used for acid reflux problems.",
+    use: "Used for acid reflux.",
+    warning:
+      "Avoid self-medication.",
   },
 
   {
     name: "Ondansetron",
-    about:
-      "Used for nausea and vomiting control.",
+    use: "Used for nausea and vomiting.",
+    warning:
+      "Consult healthcare professional.",
   },
 
   {
     name: "Metformin",
-    about:
-      "Used for diabetes management.",
-  },
-
-  {
-    name: "Atorvastatin",
-    about:
-      "Used for cholesterol control.",
-  },
-
-  {
-    name: "Amlodipine",
-    about:
-      "Used for blood pressure control.",
+    use: "Used for diabetes management.",
+    warning:
+      "Requires proper monitoring.",
   },
 
   {
     name: "Cetirizine",
-    about:
-      "Used for allergies and itching.",
+    use: "Used for allergies and itching.",
+    warning:
+      "May cause drowsiness.",
   },
 
   {
     name: "Montelukast",
-    about:
-      "Used for asthma and allergies.",
+    use: "Used for allergies and asthma.",
+    warning:
+      "Use only when prescribed.",
   },
 
   {
-    name: "Albuterol",
-    about:
-      "Used for breathing difficulty and asthma.",
+    name: "Amlodipine",
+    use: "Used for blood pressure control.",
+    warning:
+      "Requires monitoring.",
+  },
+
+  {
+    name: "Crocin",
+    use: "Used for fever relief.",
+    warning:
+      "Avoid excessive dosage.",
+  },
+
+  {
+    name: "Vitamin C",
+    use: "Supports immunity.",
+    warning:
+      "Use balanced dosage.",
+  },
+
+  {
+    name: "ORS",
+    use: "Used for dehydration recovery.",
+    warning:
+      "Maintain proper hydration.",
+  },
+
+  {
+    name: "Diclofenac",
+    use: "Used for pain relief.",
+    warning:
+      "May irritate stomach.",
+  },
+
+  {
+    name: "Dolo 650",
+    use: "Used for fever and pain.",
+    warning:
+      "Avoid overdose.",
+  },
+
+  {
+    name: "Aspirin",
+    use: "Used for pain and heart care.",
+    warning:
+      "Not suitable for everyone.",
+  },
+
+  {
+    name: "Calcium Tablets",
+    use: "Support bone strength.",
+    warning:
+      "Use balanced intake.",
+  },
+
+  {
+    name: "Iron Tablets",
+    use: "Help treat iron deficiency.",
+    warning:
+      "Avoid excess intake.",
+  },
+
+  {
+    name: "Zinc Tablets",
+    use: "Support immunity.",
+    warning:
+      "Use proper dosage.",
+  },
+
+  {
+    name: "Losartan",
+    use: "Used for blood pressure.",
+    warning:
+      "Monitor blood pressure regularly.",
+  },
+
+  {
+    name: "Telmisartan",
+    use: "Used for hypertension.",
+    warning:
+      "Requires medical guidance.",
+  },
+
+  {
+    name: "Salbutamol",
+    use: "Used for asthma relief.",
+    warning:
+      "Avoid overuse.",
+  },
+
+  {
+    name: "Folic Acid",
+    use: "Supports blood cell production.",
+    warning:
+      "Use recommended dosage.",
+  },
+
+  {
+    name: "Multivitamin",
+    use: "Supports overall health.",
+    warning:
+      "Do not replace healthy diet.",
+  },
+
+  {
+    name: "Levocetirizine",
+    use: "Used for allergies.",
+    warning:
+      "May cause sleepiness.",
+  },
+
+  {
+    name: "Ranitidine",
+    use: "Used for acidity.",
+    warning:
+      "Use only when needed.",
+  },
+
+  {
+    name: "Prednisolone",
+    use: "Used for inflammation.",
+    warning:
+      "Requires doctor supervision.",
+  },
+
+  {
+    name: "Ciprofloxacin",
+    use: "Used for bacterial infections.",
+    warning:
+      "Use responsibly.",
+  },
+
+  {
+    name: "Atorvastatin",
+    use: "Used for cholesterol control.",
+    warning:
+      "Requires regular monitoring.",
   },
 ];
 
@@ -472,23 +506,55 @@ function Home() {
     useState<Reminder[]>([]);
 
   const analyzeSymptoms = () => {
-    const userSymptoms =
-      symptomInput
-        .toLowerCase()
-        .split(",")
-        .map((s) => s.trim());
+    const input =
+      symptomInput.toLowerCase();
 
-    const matched =
-      diseases.filter((disease) =>
-        disease.symptoms.some(
-          (symptom) =>
-            userSymptoms.includes(
-              symptom
-            )
-        )
+    const matched: Disease[] = [];
+
+    diseases.forEach((disease) => {
+      disease.symptoms.forEach(
+        (symptom) => {
+          if (
+            input.includes(symptom)
+          ) {
+            matched.push(disease);
+          }
+        }
+      );
+    });
+
+    const unique =
+      matched.filter(
+        (
+          value,
+          index,
+          self
+        ) =>
+          index ===
+          self.findIndex(
+            (t) =>
+              t.name === value.name
+          )
       );
 
-    setResults(matched);
+    if (unique.length === 0) {
+      setResults([
+        {
+          name:
+            "No Exact Match Found",
+          symptoms: [],
+          severity: "Low",
+          cause:
+            "Symptoms are not fully recognized.",
+          solution:
+            "Consult a healthcare professional.",
+        },
+      ]);
+
+      return;
+    }
+
+    setResults(unique);
   };
 
   const addReminder = () => {
@@ -552,9 +618,7 @@ function Home() {
     number: string
   ) => {
     navigate("/emergency", {
-      state: {
-        number,
-      },
+      state: { number },
     });
   };
 
@@ -566,11 +630,11 @@ function Home() {
 
       <section className="hero">
         <h2>
-          AI Health Analyzer
+          AI Symptom Analyzer
         </h2>
 
         <textarea
-          placeholder="Enter symptoms..."
+          placeholder="Enter symptoms like stomach pain, chest pain, urination problem..."
           value={symptomInput}
           onChange={(e) =>
             setSymptomInput(
@@ -598,8 +662,9 @@ function Home() {
               </h2>
 
               <p>
-                Severity:
-                {" "}
+                <strong>
+                  Severity:
+                </strong>{" "}
                 {
                   disease.severity
                 }
@@ -608,8 +673,7 @@ function Home() {
               <p>
                 <strong>
                   Cause:
-                </strong>
-                {" "}
+                </strong>{" "}
                 {
                   disease.cause
                 }
@@ -618,8 +682,7 @@ function Home() {
               <p>
                 <strong>
                   Solution:
-                </strong>
-                {" "}
+                </strong>{" "}
                 {
                   disease.solution
                 }
@@ -639,19 +702,193 @@ function Home() {
       <section className="features">
         <div className="feature-card">
           <h3>
-            💊 Smart Reminder
+            <section className="doctor-section">
+  <h2>
+    🌿 Daily Health Tips
+  </h2>
+
+  <div className="doctor-grid">
+    <div className="doctor-card">
+      <h3>
+        💧 Drink Water
+      </h3>
+
+      <p>
+        Drink enough water
+        daily to stay
+        hydrated.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🥗 Healthy Diet
+      </h3>
+
+      <p>
+        Eat fruits and
+        vegetables regularly.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🏃 Exercise
+      </h3>
+
+      <p>
+        Exercise daily to
+        improve fitness.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        😴 Sleep
+      </h3>
+
+      <p>
+        Sleep 7-8 hours every
+        night.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🚭 Avoid Smoking
+      </h3>
+
+      <p>
+        Smoking damages lungs
+        and heart health.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🍎 Balanced Food
+      </h3>
+
+      <p>
+        Maintain a balanced
+        nutritious diet.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🧘 Reduce Stress
+      </h3>
+
+      <p>
+        Practice meditation
+        and relaxation.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🪥 Brush Teeth
+      </h3>
+
+      <p>
+        Brush teeth twice
+        daily for oral health.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        ☀ Vitamin D
+      </h3>
+
+      <p>
+        Get sunlight exposure
+        for Vitamin D.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🚶 Walking
+      </h3>
+
+      <p>
+        Walk daily to improve
+        blood circulation.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🧼 Hygiene
+      </h3>
+
+      <p>
+        Maintain cleanliness
+        and hygiene.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        📵 Reduce Screen Time
+      </h3>
+
+      <p>
+        Reduce excessive
+        mobile and laptop
+        usage.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        ❤️ Heart Care
+      </h3>
+
+      <p>
+        Avoid junk food and
+        oily foods.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🫁 Lung Care
+      </h3>
+
+      <p>
+        Avoid smoke and dusty
+        environments.
+      </p>
+    </div>
+
+    <div className="doctor-card">
+      <h3>
+        🩺 Regular Checkups
+      </h3>
+
+      <p>
+        Consult healthcare
+        professionals
+        regularly.
+      </p>
+    </div>
+  </div>
+</section>
+            💊 Smart Medicine Alarm
           </h3>
 
           <input
             type="text"
-            placeholder="Medicine"
+            placeholder="Medicine Name"
             value={medicine}
             onChange={(e) =>
               setMedicine(
                 e.target.value
               )
             }
-            className="medicine-input"
           />
 
           <input
@@ -663,7 +900,6 @@ function Home() {
                 e.target.value
               )
             }
-            className="medicine-input"
           />
 
           <button
@@ -671,32 +907,6 @@ function Home() {
           >
             Add Reminder
           </button>
-        </div>
-
-        <div className="feature-card">
-          <h3>
-            🩺 Daily Health Tips
-          </h3>
-
-          <div className="tip-item">
-            💧 Drink water daily
-          </div>
-
-          <div className="tip-item">
-            🏃 Exercise regularly
-          </div>
-
-          <div className="tip-item">
-            😴 Sleep 8 hours
-          </div>
-
-          <div className="tip-item">
-            🥗 Eat healthy food
-          </div>
-
-          <div className="tip-item">
-            🚭 Avoid smoking
-          </div>
         </div>
       </section>
 
@@ -755,8 +965,20 @@ function Home() {
                 </h3>
 
                 <p>
+                  <strong>
+                    Use:
+                  </strong>{" "}
                   {
-                    medicine.about
+                    medicine.use
+                  }
+                </p>
+
+                <p>
+                  <strong>
+                    Warning:
+                  </strong>{" "}
+                  {
+                    medicine.warning
                   }
                 </p>
               </div>
@@ -767,58 +989,33 @@ function Home() {
 
       <section className="emergency-section">
         <h2>
-          🚨 Emergency
-          Services
+          🚨 Emergency Services
         </h2>
 
         <div className="emergency-grid">
-          <div className="emergency-card">
-            <h3>
-              🚑 Ambulance
-            </h3>
+          <button
+            onClick={() =>
+              makeCall("102")
+            }
+          >
+            🚑 Ambulance
+          </button>
 
-            <p>102</p>
+          <button
+            onClick={() =>
+              makeCall("108")
+            }
+          >
+            🏥 Emergency
+          </button>
 
-            <button
-              onClick={() =>
-                makeCall("102")
-              }
-            >
-              📞 Call Ambulance
-            </button>
-          </div>
-
-          <div className="emergency-card">
-            <h3>
-              🏥 Emergency
-            </h3>
-
-            <p>108</p>
-
-            <button
-              onClick={() =>
-                makeCall("108")
-              }
-            >
-              📞 Call Emergency
-            </button>
-          </div>
-
-          <div className="emergency-card">
-            <h3>
-              ❤️ Heart Emergency
-            </h3>
-
-            <p>911</p>
-
-            <button
-              onClick={() =>
-                makeCall("911")
-              }
-            >
-              🚨 Critical Call
-            </button>
-          </div>
+          <button
+            onClick={() =>
+              makeCall("100")
+            }
+          >
+            👮 Police
+          </button>
         </div>
       </section>
     </div>
