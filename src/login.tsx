@@ -13,16 +13,17 @@ function Login() {
   const [email, setEmail] =
     useState("");
 
+  const [accepted, setAccepted] =
+    useState(false);
+
   const [showTerms, setShowTerms] =
     useState(false);
 
   const [showAbout, setShowAbout] =
     useState(false);
 
-  const [
-    showDisclaimer,
-    setShowDisclaimer,
-  ] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] =
+    useState(false);
 
   const handleLogin = () => {
     if (!name || !email) {
@@ -33,14 +34,9 @@ function Login() {
       return;
     }
 
-    const checkbox =
-      document.getElementById(
-        "agree"
-      ) as HTMLInputElement;
-
-    if (!checkbox.checked) {
+    if (!accepted) {
       alert(
-        "Please accept all conditions before entering MediFast."
+        "Please accept terms and policies"
       );
 
       return;
@@ -90,134 +86,114 @@ function Login() {
           }
         />
 
-        {/* INFO BUTTONS */}
-
-        <div className="info-buttons">
-          <button
-            onClick={() =>
-              setShowTerms(
-                !showTerms
-              )
-            }
-          >
-            📋 Terms & Policies
-          </button>
-
-          <button
-            onClick={() =>
-              setShowAbout(
-                !showAbout
-              )
-            }
-          >
-            🌐 About Website
-          </button>
-
-          <button
-            onClick={() =>
-              setShowDisclaimer(
-                !showDisclaimer
-              )
-            }
-          >
-            ⚠ Disclaimer
-          </button>
-        </div>
-
-        {/* TERMS */}
+        {/* TERMS BUTTON */}
+        <button
+          className="info-btn"
+          onClick={() =>
+            setShowTerms(
+              !showTerms
+            )
+          }
+        >
+          📜 Terms & Policies
+        </button>
 
         {showTerms && (
           <div className="info-box">
-            <h3>
-              📋 Terms &
-              Policies
-            </h3>
-
             <p>
-              • It only shows
+              1. It only shows
               possible conditions.
             </p>
 
             <p>
-              • It does not
+              2. It does not
               prescribe medicines
               to use.
             </p>
 
             <p>
-              • It does not claim
+              3. It does not claim
               to be a doctor.
             </p>
 
             <p>
-              • It encourages
+              4. It encourages
               users to consult
               healthcare
               professionals.
             </p>
 
             <p>
-              • Helps users learn
-              health awareness
-              and wellness tips.
+              5. Helps users learn
+              health awareness and
+              health tips.
             </p>
           </div>
         )}
 
-        {/* ABOUT WEBSITE */}
+        {/* ABOUT BUTTON */}
+        <button
+          className="info-btn"
+          onClick={() =>
+            setShowAbout(
+              !showAbout
+            )
+          }
+        >
+          ℹ About MediFast
+        </button>
 
         {showAbout && (
           <div className="info-box">
-            <h3>
-              🌐 About
-              MediFast
-            </h3>
-
             <p>
               MediFast is an AI
-              assisted wellness
-              and health
-              management platform
-              designed to help
-              users organize
+              assisted wellness and
+              health management
+              platform designed to
+              help users organize
               health information
               and receive general
-              educational
-              insights.
+              educational insights.
             </p>
+
+            <br />
 
             <p>
               It is not a medical
-              provider and does
-              not replace
-              professional
-              healthcare
-              services.
+              provider and does not
+              replace professional
+              healthcare services.
             </p>
           </div>
         )}
 
         {/* DISCLAIMER */}
+        <button
+          className="info-btn"
+          onClick={() =>
+            setShowDisclaimer(
+              !showDisclaimer
+            )
+          }
+        >
+          ⚠ Main Disclaimer
+        </button>
 
         {showDisclaimer && (
           <div className="info-box warning-box">
-            <h3>
-              ⚠ Disclaimer
-            </h3>
-
             <p>
               MediFast does not
               provide medical
-              diagnosis,
-              treatment, or
-              professional
+              diagnosis, treatment,
+              or professional
               medical advice.
             </p>
 
+            <br />
+
             <p>
               Always consult a
-              qualified
-              healthcare
+              qualified healthcare
               professional before
               making medical
               decisions.
@@ -225,26 +201,57 @@ function Login() {
           </div>
         )}
 
-        {/* CONDITIONS */}
+        {/* SPECIAL THANKS */}
+        <div className="credits-box">
+          <h3>
+            🌟 Special Thanks
+          </h3>
 
-        <div className="agree-box">
-          <input
-            type="checkbox"
-            id="agree"
-          />
+          <p>
+            ❤️ Jegan bro for
+            supporting me to create
+            my first website.
+          </p>
 
-          <label htmlFor="agree">
-            I have read and
-            accepted the Terms &
-            Policies, About
-            Website, and
-            Disclaimer conditions
-            before entering
-            MediFast.
-          </label>
+          <p>
+            👨‍⚕ Dr. Rajesh Kumar
+            for appreciating and
+            giving feedback for my
+            website.
+          </p>
+
+          <p>
+            👨‍🏫 Science Teacher
+            Selvaraj Master for
+            giving ideas and
+            support.
+          </p>
+
+          <p>
+            🚀 And thanks to myself
+            for believing and
+            creating my first
+            website.
+          </p>
         </div>
 
-        {/* LOGIN BUTTON */}
+        {/* ACCEPT */}
+        <div className="checkbox-area">
+          <input
+            type="checkbox"
+            checked={accepted}
+            onChange={() =>
+              setAccepted(
+                !accepted
+              )
+            }
+          />
+
+          <p>
+            I accept the Terms,
+            Policies & Disclaimer
+          </p>
+        </div>
 
         <button
           onClick={handleLogin}

@@ -116,6 +116,125 @@ const diseases: Disease[] = [
     solution:
       "Drink more water and maintain hygiene.",
   },
+{
+  name: "Throat Infection",
+  symptoms: [
+    "throat pain",
+    "pain in throat",
+    "sore throat",
+    "throat hurting",
+    "mouth pain",
+    "pain in mouth",
+    "mouth hurting",
+    "teeth pain",
+    "tooth pain",
+    "gum pain",
+  ],
+  severity: "Medium",
+  cause:
+    "Throat or mouth infections may occur because of bacteria or viruses.",
+  solution:
+    "Drink warm water and maintain oral hygiene.",
+},
+
+{
+  name: "Ear Infection",
+  symptoms: [
+    "ear pain",
+    "pain in ear",
+    "ear hurting",
+    "hearing problem",
+  ],
+  severity: "Medium",
+  cause:
+    "Ear infections may occur because of bacteria or allergies.",
+  solution:
+    "Avoid loud noise and consult ENT specialist.",
+},
+
+{
+  name: "Back Pain",
+  symptoms: [
+    "back pain",
+    "pain in back",
+    "back hurting",
+    "lower back pain",
+    "upper back pain",
+    "neck pain",
+    "pain in neck",
+    "neck hurting",
+  ],
+  severity: "Low",
+  cause:
+    "Back or neck pain may occur because of posture issues or muscle strain.",
+  solution:
+    "Exercise regularly and maintain posture.",
+},
+
+{
+  name: "Leg And Hand Pain",
+  symptoms: [
+    "leg pain",
+    "pain in leg",
+    "leg hurting",
+    "knee pain",
+    "joint pain",
+    "muscle pain",
+    "bone pain",
+    "body pain",
+    "hand pain",
+    "pain in hand",
+    "finger pain",
+    "wrist pain",
+    "shoulder pain",
+  ],
+  severity: "Medium",
+  cause:
+    "Joint or muscle pain may occur because of strain or inflammation.",
+  solution:
+    "Take proper rest and avoid heavy strain.",
+},
+
+{
+  name: "Mental Stress",
+  symptoms: [
+    "stress",
+    "sad",
+    "feeling sad",
+    "depressed",
+    "tension",
+    "mental pressure",
+    "anxiety",
+    "overthinking",
+  ],
+  severity: "Medium",
+  cause:
+    "Mental stress may occur because of emotional pressure or anxiety.",
+  solution:
+    "Take proper rest, meditation and emotional support.",
+},
+
+{
+  name: "Skin Problem",
+  symptoms: [
+    "pimples",
+    "acne",
+    "black dots",
+    "blackheads",
+    "itching",
+    "skin allergy",
+    "rash",
+    "skin redness",
+    "face pimples",
+  ],
+  severity: "Low",
+  cause:
+    "Skin problems may occur because of allergies, hormones or bacteria.",
+  solution:
+    "Maintain skin hygiene and avoid allergens.",
+},
+
+
 
   {
     name: "Lung Problem",
@@ -131,138 +250,7 @@ const diseases: Disease[] = [
     solution:
       "Avoid smoking and seek medical evaluation.",
   },
-
-
-{
-  name: "Back Pain",
-  symptoms: [
-    "back pain",
-    "pain in back",
-    "back hurting",
-    "lower back pain",
-    "upper back pain",
-    "spine pain",
-  ],
-  severity: "Low",
-  cause:
-    "Back pain may occur because of poor posture or muscle strain.",
-  solution:
-    "Maintain proper posture and do stretching exercises.",
-},
-
-{
-  name: "Neck Pain",
-  symptoms: [
-    "neck pain",
-    "pain in neck",
-    "neck hurting",
-    "stiff neck",
-  ],
-  severity: "Low",
-  cause:
-    "Neck pain may occur because of poor sleeping posture or strain.",
-  solution:
-    "Take proper rest and avoid strain.",
-},
-
-{
-  name: "Leg Pain",
-  symptoms: [
-    "leg pain",
-    "pain in leg",
-    "legs hurting",
-    "knee pain",
-    "pain in knee",
-    "joint pain",
-  ],
-  severity: "Medium",
-  cause:
-    "Leg pain may occur because of muscle strain or joint inflammation.",
-  solution:
-    "Take proper rest and avoid excessive movement.",
-},
-
-{
-  name: "Hand Pain",
-  symptoms: [
-    "hand pain",
-    "pain in hand",
-    "finger pain",
-    "pain in finger",
-    "hand hurting",
-  ],
-  severity: "Low",
-  cause:
-    "Hand pain may occur because of overuse or strain.",
-  solution:
-    "Rest your hand and avoid excessive pressure.",
-},
-
-{
-  name: "Skin Allergy",
-  symptoms: [
-    "itching",
-    "skin itching",
-    "body itching",
-    "skin rash",
-    "red spots",
-    "skin irritation",
-  ],
-  severity: "Low",
-  cause:
-    "Skin allergy may occur because of allergens or irritation.",
-  solution:
-    "Maintain hygiene and avoid allergens.",
-},
-
-{
-  name: "Acne / Pimples",
-  symptoms: [
-    "pimples",
-    "acne",
-    "face pimples",
-    "black dots",
-    "blackheads",
-    "face spots",
-    "skin pimples",
-  ],
-  severity: "Low",
-  cause:
-    "Pimples may occur because of hormones or oily skin.",
-  solution:
-    "Maintain face hygiene and avoid oily products.",
-},
-
-{
-  name: "Muscle Pain",
-  symptoms: [
-    "muscle pain",
-    "body pain",
-    "muscle strain",
-    "body hurting",
-  ],
-  severity: "Low",
-  cause:
-    "Muscle pain may occur because of physical strain or tiredness.",
-  solution:
-    "Take proper rest and stay hydrated.",
-},
-
-{
-  name: "Bone Problem",
-  symptoms: [
-    "bone pain",
-    "bones hurting",
-    "joint stiffness",
-    "bone weakness",
-  ],
-  severity: "Medium",
-  cause:
-    "Bone problems may occur because of calcium deficiency or injury.",
-  solution:
-    "Maintain calcium-rich diet and consult doctor if severe.",
-},
-]
+];
 
 const bodyParts = [
   {
@@ -833,181 +821,6 @@ function Home() {
       <section className="features">
         <div className="feature-card">
           <h3>
-            <section className="doctor-section">
-  <h2>
-    🌿 Daily Health Tips
-  </h2>
-
-  <div className="doctor-grid">
-    <div className="doctor-card">
-      <h3>
-        💧 Drink Water
-      </h3>
-
-      <p>
-        Drink enough water
-        daily to stay
-        hydrated.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🥗 Healthy Diet
-      </h3>
-
-      <p>
-        Eat fruits and
-        vegetables regularly.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🏃 Exercise
-      </h3>
-
-      <p>
-        Exercise daily to
-        improve fitness.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        😴 Sleep
-      </h3>
-
-      <p>
-        Sleep 7-8 hours every
-        night.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🚭 Avoid Smoking
-      </h3>
-
-      <p>
-        Smoking damages lungs
-        and heart health.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🍎 Balanced Food
-      </h3>
-
-      <p>
-        Maintain a balanced
-        nutritious diet.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🧘 Reduce Stress
-      </h3>
-
-      <p>
-        Practice meditation
-        and relaxation.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🪥 Brush Teeth
-      </h3>
-
-      <p>
-        Brush teeth twice
-        daily for oral health.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        ☀ Vitamin D
-      </h3>
-
-      <p>
-        Get sunlight exposure
-        for Vitamin D.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🚶 Walking
-      </h3>
-
-      <p>
-        Walk daily to improve
-        blood circulation.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🧼 Hygiene
-      </h3>
-
-      <p>
-        Maintain cleanliness
-        and hygiene.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        📵 Reduce Screen Time
-      </h3>
-
-      <p>
-        Reduce excessive
-        mobile and laptop
-        usage.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        ❤️ Heart Care
-      </h3>
-
-      <p>
-        Avoid junk food and
-        oily foods.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🫁 Lung Care
-      </h3>
-
-      <p>
-        Avoid smoke and dusty
-        environments.
-      </p>
-    </div>
-
-    <div className="doctor-card">
-      <h3>
-        🩺 Regular Checkups
-      </h3>
-
-      <p>
-        Consult healthcare
-        professionals
-        regularly.
-      </p>
-    </div>
-  </div>
-</section>
             💊 Smart Medicine Alarm
           </h3>
 
